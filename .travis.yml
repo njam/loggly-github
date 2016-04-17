@@ -1,0 +1,16 @@
+sudo: false
+language: node_js
+
+script: npm test
+
+deploy:
+  provider: npm
+  email: tech@cargomedia.ch
+  api_key:
+    secure: hDJ/cX5OAhTRgEMXpqShAEAoO6REluEK+dB3aEAll2zsYNDIk6W1JSsF5/KVi1U3dC9Izs2Ke77549EGiO+6ZYc6N2uOHhXYGvnwReRutEpodwBXT48qFBB7Z1VOwIgsXcVn10wjv1mZV2uueqNb/0UtfjgiMDx3VBSt3ROz6Ep8YciT1jJwAbZ+9ZaAj7YVQ6rubTZ3R70WXx7vlURlVKML+UkFogGYjNopXadfjzr7Wow5qg7dB5yGB8kCEQNVMEf4BIJhyK3qwt/DJQvI7gnYCrLwx2VZZtaK8va71B+/Km/ELf6Zp7AiUYejMA/bcSKPJ1Kd8sXZSpCGlE1ZD3KeDYJaUC9RQSoD5U3QK5sI+rN4derFqp5xTHPPgTiVO1/E0pPK0vorFZ4T4OtzK6k2Bgu0WTnv98AvLVeMyEXf7e/XVqcNQjBvvfI16fDD4j8PFpiYx/7VRMVIy+ftQ6vUJZB8vbl4T2CMx7AMUK4PQ0bHpKOw5Sm4IG2FBvQ/1p25BUqBzYOody00VICR2NsQ12Kipq3VR9LqmGxlUaJy+7kDZpDkQB1KJ2o6TyEutubAqvyE2RZunr8xgk7O06PIFf9Z4VJppvaG3/LxZLRCNdER11DEdK4pxMd+wWWKludwxJszBMAtrv5UsveI2n8aSh1IpM9CpcpNenBi3Q4=
+  on:
+    tags: true
+    repo: cargomedia/loggly-github
+
+notifications:
+  email: false

@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+var Config = require('../src/config');
+var Github = require('../src/handler/github');
+var startServer = require('../src/server');
+
+var config = new Config('config.json');
+var handler = new Github(config['github']);
+startServer(config['port'], handler);

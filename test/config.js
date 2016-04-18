@@ -10,7 +10,7 @@ describe('config', function() {
     path = tmp.fileSync().name;
   });
 
-  it('reads, parses and returns a valid config', function testSlash(done) {
+  it('reads, parses and returns a valid config', function() {
     var data = {
       port: 1234,
       github: {
@@ -21,10 +21,9 @@ describe('config', function() {
 
     var config = new Config(path);
     assert.deepEqual(config, data);
-    done();
   });
 
-  it('fails on invalid data', function testSlash(done) {
+  it('fails on invalid data', function() {
     var data = {
       foo: 12
     };
@@ -33,7 +32,6 @@ describe('config', function() {
     assert.throws(function() {
       new Config(path);
     });
-    done();
   });
 
 });

@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+var argv = require('yargs')
+  .usage('Usage: $0 [options]')
+  .demand('config')
+  .describe('config', 'Path to config file')
+  .argv;
+
+var Config = require('../src/config');
+var Github = require('../src/handler/github');
+var startServer = require('../src/server');
+
+var config = new Config(argv['config']);
+var handler = new Github(config['github']);
+startServer(config['port'], handler);

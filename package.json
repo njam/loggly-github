@@ -1,0 +1,39 @@
+{
+  "name": "loggly-github",
+  "description": "Create GitHub tickets for Loggly alerts.",
+  "version": "0.0.0",
+  "author": "Cargo Media",
+  "license": "MIT",
+  "bin": {
+    "loggly-github": "./index.js"
+  },
+  "keywords": [
+    "loggly",
+    "github"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:cargomedia/loggly-github.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cargomedia/loggly-github/issues"
+  },
+  "scripts": {
+    "test": "$(npm bin)/mocha"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "jsonschema": "^1.1.0",
+    "github": "^0.2.4",
+    "yargs": "^4.6.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "chai": "^3.5.0",
+    "supertest": "^1.2.0",
+    "tmp": "^0.0.28",
+    "sinon": "^1.17.3",
+    "mocha-sinon": "^1.1.5"
+  }
+}

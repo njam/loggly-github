@@ -33,10 +33,12 @@ loggly-github --config <path-to-config-file>
 ```
 
 ### Create a new *alerting endpoint* in Loggly
-Configure the endpoint in *Loggly* to send a POST request to the root of the *loggly-github* server.
-Send along the following parameters:
-- `user`: GitHub username of the repo where the ticket is created
-- `repo`: GitHub repo where the ticket is created
+Configure the endpoint in *Loggly* to send a POST request to the *loggly-github* server:
+```
+http://my-server:1234/github/<github-user>/<github-repo>?assignee=<assignee>
+```
+- `github-user`/`github-repo` (required): GitHub repo where the ticket is created
+- `assignee` (optional): GitHub user to assign the ticket to
 
 <img src="docu/img/loggly-alert-endpoint.png" height="300">
 

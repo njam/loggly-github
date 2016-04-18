@@ -24,13 +24,16 @@ util.inherits(Github, HandlerAbstract);
  * @param {Object} options
  */
 Github.prototype.handleAlert = function(alert, options) {
-  var params = {
+  var issueParams = {
     user: options['user'],
     repo: options['repo'],
     title: 'Loggly Alert: ' + alert.name,
     body: alert.searchLink + "\n\n" + alert.recentHits.join("\n")
   };
-  this.api.issues.create(params, function(err, result) {
+  if (options['assignee']) {
+    issueParams['assignee'] = options['assignee'];
+  }
+  this.api.issues.create(issueParams, function(err, result) {
     if (err) {
       console.error('Error creating GitHub issue: ' + err.message);
     }

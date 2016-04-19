@@ -14,4 +14,4 @@ var startServer = require('../src/server');
 
 var config = new Config(argv['config']);
 var handler = new Github(config['github']);
-startServer(config['port'], handler);
+startServer(config['port'], config['secret'], handler);

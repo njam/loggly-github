@@ -13,6 +13,7 @@ describe('config', function() {
   it('reads, parses and returns a valid config', function() {
     var data = {
       port: 1234,
+      secret: 'my-secret',
       github: {
         token: 'foo'
       }

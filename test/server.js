@@ -10,7 +10,7 @@ describe('server', function() {
   var server, handler;
   beforeEach(function() {
     handler = sinon.createStubInstance(HandlerAbstract);
-    server = startServer(1234, handler);
+    server = startServer(1234, 'my-secret', handler);
   });
   afterEach(function(done) {
     server.close(done);
@@ -21,7 +21,7 @@ describe('server', function() {
     var payload = {'alert_name': alert.name, 'search_link': alert.searchLink, 'recent_hits': alert.recentHits};
 
     request(server)
-      .post('/github/foo/bar?assignee=bob')
+      .post('/my-secret/github/foo/bar?assignee=bob')
       .send(JSON.stringify(payload))
       .set('Content-Type', 'text/plain; charset=ISO-8859-1')
       .set('User-Agent', 'Apache-HttpClient/4.3.2 (java 1.5)')
@@ -36,7 +36,7 @@ describe('server', function() {
     var payload = {'alert_name': 'my-name', 'alert_description': 'my-desc'};
 
     request(server)
-      .post('/github/foo/bar')
+      .post('/my-secret/github/foo/bar')
       .send('something invalid')
       .set('Content-Type', 'text/plain; charset=ISO-8859-1')
       .expect(500)
@@ -45,7 +45,7 @@ describe('server', function() {
 
   it('errors on GET', function(done) {
     request(server)
-      .get('/github/foo/bar')
+      .get('/my-secret/github/foo/bar')
       .expect(404, done);
   });
 

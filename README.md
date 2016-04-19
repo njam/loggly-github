@@ -20,6 +20,7 @@ npm install -g loggly-github
 ```json
 {
   "port": "<HTTP port to listen on>",
+  "secret": "<Any alphanumeric API secret>"
   "github": {
     "token": "<GitHub access token>"
   }
@@ -35,8 +36,9 @@ loggly-github --config <path-to-config-file>
 ### Create a new *alerting endpoint* in Loggly
 Configure the endpoint in *Loggly* to send a POST request to the *loggly-github* server:
 ```
-http://my-server:1234/github/<github-user>/<github-repo>?assignee=<assignee>
+http://my-server:1234/<secret>/github/<github-user>/<github-repo>?assignee=<assignee>
 ```
+- `secret` (required): The *secret* as defined in your configuration
 - `github-user`/`github-repo` (required): GitHub repo where the ticket is created
 - `assignee` (optional): GitHub user to assign the ticket to
 

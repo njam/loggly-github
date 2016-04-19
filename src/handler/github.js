@@ -33,7 +33,7 @@ Github.prototype.handleAlert = function(alert, options) {
   var repo = options['repo'];
   var assignee = options['assignee'];
   var title = `Loggly Alert: ${alert.name}`;
-  var body = alert.searchLink + "\n\n" + alert.recentHits.join("\n");
+  var body = this._getIssueBody(alert);
 
   return this._getAllOpenIssues(user, repo).then(function(issues) {
     var issue = issues.find(function(issue) {
@@ -99,6 +99,18 @@ Github.prototype._createIssue = function(user, repo, title, body, assignee) {
       }
     });
   });
+};
+
+/**
+ * @param {Alert} alert
+ * @return {String}
+ */
+Github.prototype._getIssueBody = function(alert) {
+  var recentHits = '';
+  if (alert.recentHits.length > 0) {
+    recentHits = ['```', alert.recentHits.join("\n"), '```'].join("\n");
+  }
+  return `${alert.searchLink}\n\n${recentHits}\n`;
 };
 
 module.exports = Github;

@@ -9,7 +9,7 @@ describe('github', function() {
   var api = {
     authenticate: new Function()
   };
-  var alert = new Alert('my-alert', 'my-link', []);
+  var alert = new Alert('my-alert', 'my-link', ['line1', 'line2']);
   var options = {
     user: 'my-user',
     repo: 'my-repo',
@@ -27,10 +27,12 @@ describe('github', function() {
   it('creates a new issue', function() {
     var github = new Github({token: 'foo'}, api);
     var success = Symbol('success');
+    var title = 'Loggly Alert: my-alert';
+    var body = "my-link\n\n```\nline1\nline2\n```\n";
 
     sinon.mock(github).expects('_getAllOpenIssues').once().returns(Promise.resolve([]));
     sinon.mock(github).expects('_createIssue').once()
-      .withArgs('my-user', 'my-repo', 'Loggly Alert: my-alert').returns(Promise.resolve(success));
+      .withArgs('my-user', 'my-repo', title, body).returns(Promise.resolve(success));
 
     return github.handleAlert(alert, options).then(function(result) {
       assert.equal(success, result);

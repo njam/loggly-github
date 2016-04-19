@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 var argv = require('yargs')
   .usage('Usage: $0 [options]')
-  .demand('config')
-  .describe('config', 'Path to config file')
+  .option('config', {
+    alias: 'c',
+    describe: 'Path to config file',
+    demand: true
+  })
   .argv;
 
 var Config = require('../src/config');

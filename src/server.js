@@ -15,19 +15,20 @@ var startServer = function(port, secret, handler) {
   app.use(bodyParser.text());
 
   app.post('/' + secret + '/github/:user/:repo', function(req, res) {
-    try {
+    Promise.resolve().then(function() {
       var data = JSON.parse(req.body);
-      validateAlertData(data);
-      var alert = new Alert(data['alert_name'], data['search_link'], data['recent_hits']);
-      var options = util._extend(req.params, req.query);
+      return validateAlertData(data);
+    }).then(function(alert) {
       console.log('Received alert: ' + alert.name);
-      handler.handleAlert(alert, options);
+      var options = util._extend(req.params, req.query);
+      return handler.handleAlert(alert, options);
+    }).then(function() {
       res.send('')
-    } catch (e) {
-      console.error('Error: ' + e.message);
+    }).catch(function(error) {
+      console.error('Error: ' + error.message);
       res.status(500);
-      res.send('Internal Server Error');
-    }
+      res.send("Internal Server Error\n");
+    });
   });
 
   return app.listen(port, function() {
@@ -38,6 +39,7 @@ var startServer = function(port, secret, handler) {
 
 /**
  * @param {Object} data
+ * @returns {Alert}
  * @throws Error
  */
 var validateAlertData = function(data) {
@@ -52,6 +54,7 @@ var validateAlertData = function(data) {
     "required": ["alert_name", "search_link", "recent_hits"]
   };
   validator.validate(data, schema, {throwError: true});
+  return new Alert(data['alert_name'], data['search_link'], data['recent_hits']);
 };
 
 module.exports = startServer;

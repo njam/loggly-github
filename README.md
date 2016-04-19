@@ -20,7 +20,7 @@ npm install -g loggly-github
 ```json
 {
   "port": "<HTTP port to listen on>",
-  "secret": "<Any alphanumeric API secret>"
+  "secret": "<Any alphanumeric API secret>",
   "github": {
     "token": "<GitHub access token>"
   }

@@ -30,6 +30,7 @@ Config.prototype.validate = function(data) {
     "type": "object",
     "properties": {
       "port": {"type": "integer", "minimum": 1},
+      "secret": {"type": "string", "pattern": "^[A-Za-z0-9\-]+$"},
       "github": {
         "type": "object",
         "properties": {
@@ -38,7 +39,7 @@ Config.prototype.validate = function(data) {
         "required": ["token"]
       }
     },
-    "required": ["port", "github"]
+    "required": ["port", "secret", "github"]
   };
   validator.validate(data, schema, {throwError: true});
 };

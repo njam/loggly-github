@@ -33,8 +33,6 @@ describe('server', function() {
   });
 
   it('errors on invalid payload', function(done) {
-    var payload = {'alert_name': 'my-name', 'alert_description': 'my-desc'};
-
     request(server)
       .post('/my-secret/github/foo/bar')
       .send('something invalid')

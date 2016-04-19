@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var util = require('util');
+var Promise = require('bluebird');
 var JsonValidator = require('jsonschema').Validator;
 var Alert = require('./alert');
 

@@ -1,7 +1,7 @@
 require('./../test_helper');
 var assert = require('chai').assert;
 var sinon = require('sinon');
-var GitHubApi = require('github');
+var Promise = require('bluebird');
 var Alert = require('../../src/alert');
 var Github = require('../../src/handler/github');
 

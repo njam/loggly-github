@@ -1,6 +1,7 @@
 var HandlerAbstract = require('./abstract');
 var util = require('util');
 var GitHubApi = require('github');
+var Promise = require('bluebird');
 
 /**
  * @param {String} options

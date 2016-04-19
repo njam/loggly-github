@@ -33,6 +33,7 @@ Github.prototype.handleAlert = function(alert, options) {
   if (options['assignee']) {
     issueParams['assignee'] = options['assignee'];
   }
+  console.log('Creating GitHub issue on ' + issueParams['user'] + '/' + issueParams['repo']);
   this.api.issues.create(issueParams, function(err, result) {
     if (err) {
       console.error('Error creating GitHub issue: ' + err.message);

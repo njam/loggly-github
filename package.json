@@ -1,9 +1,10 @@
 {
   "name": "loggly-github",
   "description": "Create GitHub tickets for Loggly alerts.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Cargo Media",
   "license": "MIT",
+  "main": "",
   "bin": {
     "loggly-github": "./index.js"
   },

@@ -38,7 +38,7 @@ describe('server', function() {
       .send('something invalid')
       .set('Content-Type', 'text/plain; charset=ISO-8859-1')
       .expect(500)
-      .expect("Internal Server Error\n", done);
+      .expect('Internal Server Error\n', done);
   });
 
   it('errors on GET', function(done) {

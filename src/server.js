@@ -16,20 +16,24 @@ var startServer = function(port, secret, handler) {
   app.use(bodyParser.text());
 
   app.post('/' + secret + '/github/:user/:repo', function(req, res) {
-    Promise.resolve().then(function() {
-      var data = JSON.parse(req.body);
-      return validateAlertData(data);
-    }).then(function(alert) {
-      console.log('Received alert: ' + alert.name);
-      var options = util._extend(req.params, req.query);
-      return handler.handleAlert(alert, options);
-    }).then(function() {
-      res.send('')
-    }).catch(function(error) {
-      console.error('Error: ' + error.message);
-      res.status(500);
-      res.send("Internal Server Error\n");
-    });
+    Promise.resolve()
+      .then(function() {
+        var data = JSON.parse(req.body);
+        return validateAlertData(data);
+      })
+      .then(function(alert) {
+        console.log('Received alert: ' + alert.name);
+        var options = util._extend(req.params, req.query);
+        return handler.handleAlert(alert, options);
+      })
+      .then(function() {
+        res.send('')
+      })
+      .catch(function(error) {
+        console.error('Error: ' + error.message);
+        res.status(500);
+        res.send('Internal Server Error\n');
+      });
   });
 
   return app.listen(port, function() {

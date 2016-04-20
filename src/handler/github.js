@@ -42,6 +42,7 @@ Github.prototype.handleAlert = function(alert, options) {
     });
     if (issue) {
       console.log(`Found an existing open issue (${user}/${repo}#${issue['number']}), skipping.`)
+      return Promise.resolve();
     } else {
       console.log(`Creating new issue on ${user}/${repo}.`);
       return this._createIssue(user, repo, title, body, assignee);

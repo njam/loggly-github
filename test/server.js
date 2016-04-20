@@ -1,4 +1,3 @@
-require('./test_helper');
 var request = require('supertest');
 var assert = require('chai').assert;
 var sinon = require('sinon');
@@ -38,7 +37,7 @@ describe('server', function() {
       .send('something invalid')
       .set('Content-Type', 'text/plain; charset=ISO-8859-1')
       .expect(500)
-      .expect('Internal Server Error', done);
+      .expect('Internal Server Error\n', done);
   });
 
   it('errors on GET', function(done) {

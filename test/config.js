@@ -1,4 +1,3 @@
-require('./test_helper');
 var assert = require('chai').assert;
 var fs = require('fs');
 var tmp = require('tmp');

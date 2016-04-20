@@ -6,7 +6,7 @@ Create GitHub tickets for Loggly alerts.
 [![npm](https://img.shields.io/npm/v/loggly-github.svg)](https://www.npmjs.com/package/loggly-github)
 
 *loggly-github* starts an HTTP server where Loggly can send [alert postbacks](https://www.loggly.com/docs/alert-endpoints/) to.
-For each new alert postback it will open a GitHub ticket.
+For each new alert it will open a GitHub ticket (if there's not already an open ticket for that alert).
 
 
 Installation & Configuration

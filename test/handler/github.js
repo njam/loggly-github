@@ -1,4 +1,3 @@
-require('./../test_helper');
 var assert = require('chai').assert;
 var sinon = require('sinon');
 var Promise = require('bluebird');
@@ -26,28 +25,33 @@ describe('github', function() {
 
   it('creates a new issue', function() {
     var github = new Github({token: 'foo'}, api);
-    var success = Symbol('success');
     var title = 'Loggly Alert: my-alert';
     var body = "my-link\n\n```\nline1\nline2\n```\n";
 
-    sinon.mock(github).expects('_getAllOpenIssues').once().returns(Promise.resolve([]));
-    sinon.mock(github).expects('_createIssue').once()
-      .withArgs('my-user', 'my-repo', title, body).returns(Promise.resolve(success));
+    var getAllOpenIssuesMock = sinon.mock(github).expects('_getAllOpenIssues').once().returns(Promise.resolve([]));
+    var createIssueMock = sinon.mock(github).expects('_createIssue').once()
+      .withArgs('my-user', 'my-repo', title, body).returns(Promise.resolve());
 
-    return github.handleAlert(alert, options).then(function(result) {
-      assert.equal(success, result);
+    var handleAlertPromise = github.handleAlert(alert, options).then(function() {
+      getAllOpenIssuesMock.verify();
+      createIssueMock.verify();
     });
+    return handleAlertPromise.should.be.fulfilled
   });
 
   it('skips issue creation if an existing open issue is found', function() {
     var github = new Github({token: 'foo'}, api);
     var success = Symbol('success');
 
-    sinon.mock(github).expects('_getAllOpenIssues').once().returns(Promise.resolve([
+    var getAllOpenIssuesMock = sinon.mock(github).expects('_getAllOpenIssues').once().returns(Promise.resolve([
       {title: 'Loggly Alert: my-alert', body: 'my-body', number: 123}
     ]));
-    sinon.mock(github).expects('_createIssue').never();
+    var createIssueMock = sinon.mock(github).expects('_createIssue').never();
 
-    return github.handleAlert(alert, options);
+    var handleAlertPromise = github.handleAlert(alert, options).then(function() {
+      getAllOpenIssuesMock.verify();
+      createIssueMock.verify();
+    });
+    return handleAlertPromise.should.be.fulfilled
   });
 });

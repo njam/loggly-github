@@ -1,4 +1,3 @@
-require('./test_helper');
 var request = require('supertest');
 var assert = require('chai').assert;
 var sinon = require('sinon');

@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "author": "Cargo Media",
   "license": "MIT",
+  "main": "",
   "bin": {
     "loggly-github": "./index.js"
   },

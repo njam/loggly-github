@@ -56,3 +56,9 @@ Run tests:
 ```
 npm test
 ```
+
+Release a new version:
+
+1. Bump the version in `package.json`, merge to *master*.
+2. Push a new tag to *master*.
+3. Travis will deploy to NPM.

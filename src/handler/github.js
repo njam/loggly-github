@@ -38,7 +38,7 @@ Github.prototype.handleAlert = function(alert, options) {
 
   return this._getAllOpenIssues(user, repo).then(function(issues) {
     var issue = issues.find(function(issue) {
-      return issue['title'] == title || issue['body'].indexOf(title) > -1;
+      return issue['title'] == title || (issue['body'] && issue['body'].indexOf(title) > -1);
     });
     if (issue) {
       console.log(`Found an existing open issue (${user}/${repo}#${issue['number']}), skipping.`)

@@ -16,19 +16,35 @@ describe('server', function() {
   });
 
   it('responds to POST', function(done) {
-    var alert = new Alert('my-name', 'my-link', ['foo', 'bar']);
+    var alert = new Alert('my-name', 'my-link', ['hit1', 'hit2']);
     var payload = {'alert_name': alert.name, 'search_link': alert.searchLink, 'recent_hits': alert.recentHits};
 
     request(server)
-      .post('/my-secret/github/foo/bar?assignee=bob')
+      .post('/my-secret/github/my-user/my-repo?assignee=my-assignee')
       .send(JSON.stringify(payload))
       .set('Content-Type', 'text/plain; charset=ISO-8859-1')
       .set('User-Agent', 'Apache-HttpClient/4.3.2 (java 1.5)')
       .expect(200)
       .expect('', function() {
-        assert(handler.handleAlert.withArgs(alert, {user: 'foo', repo: 'bar', assignee: 'bob'}).calledOnce, 'handleAlert() should be called');
+        assert(handler.handleAlert.withArgs(alert, {
+          user: 'my-user',
+          repo: 'my-repo',
+          assignee: 'my-assignee'
+        }).calledOnce, 'handleAlert() should be called');
         done();
       });
+  });
+
+  it('can process big payloads', function(done) {
+    var bigData = 'x'.repeat(200 * 1000);
+    var payload = {'alert_name': 'my-name', 'search_link': 'my-link', 'recent_hits': [], 'big_data': bigData};
+
+    request(server)
+      .post('/my-secret/github/my-user/my-repo')
+      .send(JSON.stringify(payload))
+      .set('Content-Type', 'text/plain; charset=ISO-8859-1')
+      .set('User-Agent', 'Apache-HttpClient/4.3.2 (java 1.5)')
+      .expect(200, done);
   });
 
   it('errors on invalid payload', function(done) {

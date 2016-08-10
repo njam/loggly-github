@@ -13,7 +13,7 @@ var Alert = require('./alert');
  */
 var startServer = function(port, secret, handler) {
   var app = express();
-  app.use(bodyParser.text());
+  app.use(bodyParser.text({limit: '10mb'}));
 
   app.post('/' + secret + '/github/:user/:repo', function(req, res) {
     Promise.resolve()

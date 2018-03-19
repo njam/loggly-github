@@ -1,3 +1,8 @@
+UNMAINTAINED
+============
+This project is not maintained anymore.
+If you want to take over contact us at tech@cargomedia.ch.
+
 loggly-github
 =============
 Create GitHub tickets for Loggly alerts.
